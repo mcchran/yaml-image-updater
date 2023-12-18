@@ -11,7 +11,7 @@ image:
 volumePermissions:
   enabled: true
   image:
-    registry: docker.io
+    registry: gcr.io
     repository: bitnami/minideb
     tag: stretch
     pullPolicy: Always
