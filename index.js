@@ -11,6 +11,11 @@ function getInputs() {
     }; 
 }
 
+function setOutputs(dispatchedPayload, success) {
+    core.setOutput("success", success);
+    core.setOutput("updated-services", Object.keys(dispatchedPayload).join(', '));
+}
+
 // imageDataByKey = {
 //     "service-name": {
 //         "image": "image-name",
@@ -36,6 +41,7 @@ async function main(){
     const dispatchedPayload = JSON.parse(inputs.dispatchedPayload);
     console.log(dispatchedPayload)
     updateYamls(yaml_root_dir, dispatchedPayload);
+    setOutputs(dispatchedPayload, true)
 }
 
 main();
