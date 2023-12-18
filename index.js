@@ -11,13 +11,22 @@ function getInputs() {
     }; 
 }
 
+function setOutputs(dispatchedPayload, success) {
+    core.setOutput("success", success);
+    core.setOutput("updated-services", Object.keys(dispatchedPayload).join(', '));
+    // generate a random string to avoid caching
+    core.setOutput("branch-suffix", Math.random().toString(36).substring(7));   
+}
+
 // imageDataByKey = {
 //     "service-name": {
-//         "image": "image-name",
 //         "tag": "image-tag",
 //         "registry": "image-registry",
 //         "repository": "image-repository",
-//     }
+//         "github_repository": "github-repository",
+//         "commit": "the-commit-hash-of-latest-release",
+//  }
+
 function updateYamls(directoryPath, imageDataByKey) {
     const filePaths = glob.sync(`${directoryPath}/**/values*.yaml`);
     for (var file of filePaths) {
@@ -36,6 +45,7 @@ async function main(){
     const dispatchedPayload = JSON.parse(inputs.dispatchedPayload);
     console.log(dispatchedPayload)
     updateYamls(yaml_root_dir, dispatchedPayload);
+    setOutputs(dispatchedPayload, true)
 }
 
 main();

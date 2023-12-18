@@ -16,6 +16,26 @@ This GitHub Action updates images in YAML files based on a dispatched payload.
 
 **Required**: A JSON string representing the payload to be dispatched. It should contain image information keyed by service names.
 
+Example:
+  ```json
+    {
+      "repo": "the github repo it dispatched the event",
+      "commit-sha": "the unique commit that caused the event to be triggered",
+      "images": [
+        {"service-name-1": {
+          "tag": "image-tag",
+          "registry": "image-registry",
+          "repository": "image-repository",
+        }},
+        {"service-name-2": {
+          "tag": "image-tag",
+          "registry": "image-registry",
+          "repository": "image-repository",
+        }},
+      ]
+    }
+  ```
+
 ## Outputs
 
 None
