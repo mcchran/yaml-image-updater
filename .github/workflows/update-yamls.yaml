@@ -1,0 +1,47 @@
+name: Update YAML Images
+
+on:
+  workflow_dispatch:
+    inputs:
+      dispatched-payload:
+        description: 'Payload with image information (JSON)'
+        type: string
+        required: true
+
+jobs:
+  update-yaml:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Run Update YAML Action
+      id: imageUpdate
+      uses: ./
+      with:
+        target-path: test_yamls
+        dispatched-payload:  ${{inputs.dispatched-payload}}
+
+    - name: Create Pull Request
+      id: cpr
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.PAT }}
+        commit-message: Bump Images
+        committer: GitHub <noreply@github.com>
+        # author: release-bot@users.noreply.github.com
+        signoff: false
+        branch: deploy-image-updates
+        delete-branch: false
+        title: 'Chore: image bumps'
+        body: |
+          Automated PR to update image references in YAML files.
+        labels: |
+          deploy
+          automated pr
+        # assignees: mcchran
+        # reviewers: mcchran
+        # team-reviewers: |
+        #   developers
+        #   qa-team
+        draft: false

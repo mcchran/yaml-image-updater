@@ -1,0 +1,15 @@
+name: yaml-image-updater
+description: An action to update all valuefiles for a repo so as to empower a continuous deployment
+inputs:
+  target-path:
+    description: 'Path to YAML files directory'
+    required: true
+  dispatched-payload:
+    description: 'Payload with image information (JSON)'
+    required: true
+  github-token:
+    description: The token to use for github
+    required: false
+runs:
+  using: node20
+  main: index.js
