@@ -115,7 +115,7 @@ readinessProbe:
   whatever:
     metrics:
       image:
-        registry: andrikos
+        registry: my registry
         repository: repository
         tag: v2
 metrics:
@@ -128,7 +128,7 @@ metrics:
       memory: 256Mi
       cpu: 100m
   image:
-    registry: andrikos
+    registry: my registry
     repository: repository
     tag: v2
     pullPolicy: wetwetwer
