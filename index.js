@@ -11,13 +11,22 @@ function getInputs() {
     }; 
 }
 
+function setOutputs(dispatchedPayload, success) {
+    core.setOutput("success", success);
+    core.setOutput("updated-services", Object.keys(dispatchedPayload).join(', '));
+}
+
 // imageDataByKey = {
+// TODO: probably we need some nesting here so as to track the dispatcher ... 
 //     "service-name": {
-//         "image": "image-name",
 //         "tag": "image-tag",
 //         "registry": "image-registry",
 //         "repository": "image-repository",
-//     }
+// TODO: requires validation for the following
+//         "github_repository": "github-repository",
+//         "commit": "the-commit-hash-of-latest-release",
+//  }
+
 function updateYamls(directoryPath, imageDataByKey) {
     const filePaths = glob.sync(`${directoryPath}/**/values*.yaml`);
     for (var file of filePaths) {
@@ -36,6 +45,7 @@ async function main(){
     const dispatchedPayload = JSON.parse(inputs.dispatchedPayload);
     console.log(dispatchedPayload)
     updateYamls(yaml_root_dir, dispatchedPayload);
+    setOutputs(dispatchedPayload, true)
 }
 
 main();
