@@ -27,13 +27,13 @@ jobs:
       uses: peter-evans/create-pull-request@v5
       with:
         token: ${{ secrets.PAT }}
-        commit-message: Bump Images
+        commit-message: "Chore: bunp images for $(( steps.imageUpdate.outputs.updated-services ))"
         committer: GitHub <noreply@github.com>
         # author: release-bot@users.noreply.github.com
         signoff: false
-        branch: deploy-image-updates
+        branch: deploy-image-updates-${{ github.sha }}
         delete-branch: false
-        title: 'Chore: image bumps'
+        title: "Chore: bunp images for $(( steps.imageUpdate.outputs.updated-services ))"
         body: |
           Automated PR to update image references in YAML files.
         labels: |
