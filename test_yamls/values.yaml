@@ -116,7 +116,7 @@ readinessProbe:
     metrics:
       image:
         registry: andrikos
-        repository: repository
+        repository: andrikos
         tag: v2
 metrics:
   enabled: false
@@ -129,7 +129,7 @@ metrics:
       cpu: 100m
   image:
     registry: andrikos
-    repository: repository
+    repository: andrikos
     tag: v2
     pullPolicy: wetwetwer
   securityContext:
