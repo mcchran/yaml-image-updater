@@ -117,7 +117,7 @@ readinessProbe:
       image:
         registry: my registry
         repository: repository
-        tag: v2
+        tag: yep this is it
 metrics:
   enabled: false
   resources:
@@ -130,7 +130,7 @@ metrics:
   image:
     registry: my registry
     repository: repository
-    tag: v2
+    tag: yep this is it
     pullPolicy: wetwetwer
   securityContext:
     enabled: false
