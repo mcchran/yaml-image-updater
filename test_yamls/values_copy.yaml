@@ -1,0 +1,138 @@
+global:
+  sharedpostgresql: {}
+nameOverride: rudderstack-postgresql-shared
+hardPodAntiAffinity: true
+image:
+  registry: docker.io
+  repository: bitnami/postgresql
+  tag: 11.6.0-debian-9-r0
+  pullPolicy: IfNotPresent
+  debug: false
+volumePermissions:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnami/minideb
+    tag: stretch
+    pullPolicy: Always
+  securityContext:
+    runAsUser: 0
+securityContext:
+  enabled: true
+  fsGroup: 70
+  runAsUser: 70
+serviceAccount:
+  enabled: false
+replication:
+  enabled: false
+  user: repl_user
+  password: repl_password
+  slaveReplicas: 1
+  synchronousCommit: 'off'
+  numSynchronousReplicas: 0
+  applicationName: rudder_shared
+postgresqlPassword: password
+postgresqlDataDir: /bitnami/postgresql/data
+postgresqlConfiguration:
+  listenAddresses: '''*'''
+pgHbaConfiguration: |-
+  local all all trust
+  host all all localhost trust
+  host all all 10.0.0.0/8 password
+  host all all 172.16.0.0/12 password
+  host replication all 0.0.0.0/0 password
+ldap:
+  enabled: false
+  url: ''
+  server: ''
+  port: ''
+  prefix: ''
+  suffix: ''
+  baseDN: ''
+  bindDN: ''
+  bind_password: null
+  search_attr: ''
+  search_filter: ''
+  scheme: ''
+  tls: false
+service:
+  type: ClusterIP
+  port: 5432
+  annotations: {}
+shmVolume:
+  enabled: true
+persistence:
+  enabled: true
+  mountPath: /bitnami/postgresql
+  subPath: ''
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi
+  annotations: {}
+updateStrategy:
+  type: RollingUpdate
+master:
+  nodeSelector: {}
+  tolerations: []
+  labels: {}
+  annotations: {}
+  podLabels: {}
+  podAnnotations: {}
+  extraInitContainers: ''
+  extraVolumeMounts: []
+  extraVolumes: []
+slave:
+  nodeSelector: {}
+  tolerations: []
+  labels: {}
+  annotations: {}
+  podLabels: {}
+  podAnnotations: {}
+  extraInitContainers: ''
+  extraVolumeMounts: []
+  extraVolumes: []
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 250m
+networkPolicy:
+  enabled: false
+  allowExternal: true
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+  whatever:
+    metrics:
+      image:
+        registry: my registry
+        repository: repository
+        tag: yep this is it
+metrics:
+  enabled: false
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 100m
+    limits:
+      memory: 256Mi
+      cpu: 100m
+  image:
+    registry: my registry
+    repository: repository
+    tag: yep this is it
+    pullPolicy: wetwetwer
+  securityContext:
+    enabled: false
+    runAsUser: 1001
+extraEnv: []

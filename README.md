@@ -8,10 +8,6 @@ This GitHub Action updates images in YAML files based on a dispatched payload.
 
 **Required**: The path to the directory containing YAML files.
 
-### `repo-by-service`
-
-**Required**: A JSON string representing the mapping of service names to repository URLs.
-
 ### `dispatched-payload`
 
 **Required**: A JSON string representing the payload to be dispatched. It should contain image information keyed by service names.
@@ -21,24 +17,46 @@ Example:
     {
       "repo": "the github repo it dispatched the event",
       "commit-sha": "the unique commit that caused the event to be triggered",
-      "images": [
-        {"service-name-1": {
+      "images": {
+        "service-name-1": {
           "tag": "image-tag",
           "registry": "image-registry",
           "repository": "image-repository",
-        }},
+        },
         {"service-name-2": {
           "tag": "image-tag",
           "registry": "image-registry",
           "repository": "image-repository",
-        }},
-      ]
+        },
+      }},
+      "value-paths": ["path-to-file.yaml", "path-to-another-file.yaml"]
     }
   ```
+  
+  Hint `value-paths` are optional. In case of value-paths missing the whole root directory is scanned.  
+  Value paths are `relative` to the the target-path that is static for the action configuration. 
 
 ## Outputs
 
-None
+###  `updated-services`
+  
+  The services that have been updated
+
+###  `success`
+
+      Whether the action was successful
+
+###  `branch-suffix`
+
+      Unique identifier for a branch to be created
+
+###  `updated-by-repo`
+
+      The repo that triggered the update
+
+###  `updated-by-commit`
+      
+      The commit that triggered the update
 
 ## Example Usage
 
@@ -73,6 +91,7 @@ jobs:
         dispatched-payload: '{"service-name": {"image": "image-name", "tag": "image-tag", "registry": "image-registry", "repository": "image-repository"}}'
 
 ```
+
 
 This action scans the specified directory for YAML files and updates image information based on the dispatched payload.
 

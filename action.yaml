@@ -17,6 +17,10 @@ outputs:
     description: Whether the action was successful
   branch-suffix:
     description: Unique identifier for a branch to be created
+  updated-by-repo:
+    description: The repo that triggered the update
+  updated-by-commit:
+    description: The commit that triggered the update
 runs:
   using: node20
   main: index.js
