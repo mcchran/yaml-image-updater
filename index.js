@@ -28,7 +28,7 @@ function setOutputs(dispatchedPayload, success) {
 //  }
 
 function updateYamls(directoryPath, imageDataByKey) {
-    const filePaths = glob.sync(`${directoryPath}/**/values*.yaml`);
+    const filePaths = glob.sync(`${directoryPath}/**/*.yaml`);
     for (var file of filePaths) {
         for (var serviceName in imageDataByKey) {
             console.log(serviceName);
