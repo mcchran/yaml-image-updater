@@ -115,9 +115,9 @@ readinessProbe:
   whatever:
     metrics:
       image:
-        registry: my registry
-        repository: repository
-        tag: yep this is it
+        registry: registry.hub.docker.com
+        repository: rudderstack/rudder-sources
+        tag: random_tag
 metrics:
   enabled: false
   resources:
@@ -128,9 +128,9 @@ metrics:
       memory: 256Mi
       cpu: 100m
   image:
-    registry: my registry
-    repository: repository
-    tag: yep this is it
+    registry: registry.hub.docker.com
+    repository: rudderstack/rudder-sources
+    tag: random_tag
     pullPolicy: wetwetwer
   securityContext:
     enabled: false
