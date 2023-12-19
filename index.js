@@ -23,8 +23,6 @@ function setOutputs(dispatchedPayload, success) {
 //         "tag": "image-tag",
 //         "registry": "image-registry",
 //         "repository": "image-repository",
-//         "github_repository": "github-repository",
-//         "commit": "the-commit-hash-of-latest-release",
 //  }
 
 function updateYamls(directoryPath, imageDataByKey) {

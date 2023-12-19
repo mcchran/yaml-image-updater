@@ -42,14 +42,18 @@ function has_image(yamlData) {
 }
 
 function updateImageValues(image, dispatchedEvent) {
-  if (dispatchedEvent.registry) {
+  if (dispatchedEvent.registry && image.registry) {
     image.registry = dispatchedEvent.registry;
   }
-  if (dispatchedEvent.repository) {
+  if (dispatchedEvent.repository && image.repository) {
     image.repository = dispatchedEvent.repository;
   }
   if (dispatchedEvent.tag) {
-    image.tag = dispatchedEvent.tag;
+    if (image.tag) {
+      image.tag = dispatchedEvent.tag;
+    } else if (image.version) {
+      image.version = dispatchedEvent.tag;
+    }
   }
 }
 
