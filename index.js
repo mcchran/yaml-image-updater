@@ -44,8 +44,11 @@ async function main(){
     const inputs = getInputs();
     const yaml_root_dir = inputs.targetPath;
     const dispatchedPayload = JSON.parse(inputs.dispatchedPayload);
+    console.log(dispatchedPayload);
+    console.log(dispatchedPayload["value-paths"]);
+    console.log(dispatchedPayload["commit-sha"]);
 
-    var filePaths = dispatchedPayload["value-files"] ? dispatchedPayload["value-files"] : [];
+    var filePaths = dispatchedPayload["value-paths"] ? dispatchedPayload["value-paths"] : [];
     if (filePaths.length > 0) {
         filePaths = filePaths.map((filePath) => path.join(yaml_root_dir, filePath));
     } else {

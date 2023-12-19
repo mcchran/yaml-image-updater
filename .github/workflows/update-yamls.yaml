@@ -37,8 +37,8 @@ jobs:
         body: |
           Automated PR to update image references in YAML files for the following services:
           ${{steps.imageUpdate.outputs.updated-services}}
-          The pr has been triggered by ${{steps.imageUpdate.outputs.triggered-by-commit}}
-          that lies in repo: ${{steps.imageUpdate.outputs.triggered-by-repo}}
+          The pr has been triggered by ${{steps.imageUpdate.outputs.updated-by-commit}}
+          that lies in repo: ${{steps.imageUpdate.outputs.updated-by-repo}}
         labels: |
           deploy
           automated pr
