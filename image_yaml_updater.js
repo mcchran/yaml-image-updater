@@ -24,10 +24,8 @@ function updateNestedImage(yamlData, dispatchedKey, dispatchedEvent) {
     updateImageValues(yamlData[dispatchedKey].image, dispatchedEvent);
   }
   Object.keys(yamlData).forEach((key) => {
-    console.log(key)
     // need to evaluate if yamlData[key] is_scanable otherwise it will iterate over primitive types ... 
     if (is_scanable(yamlData[key])) {
-      console.log(key)
       updateNestedImage(yamlData[key], dispatchedKey, dispatchedEvent);
     }
   });
